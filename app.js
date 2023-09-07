@@ -12,14 +12,14 @@ app.get('/login',(req,res,next)=>{
 app.post('/',(req,res,next)=>{
     async function Post() {
         await new Promise((resolve,reject)=>{
-            resolve(fs.appendFileSync(__dirname+'/public/data.html',(JSON.stringify(req.body).slice(1,-1)+'<br>'),()=>1*1))
+            resolve(fs.appendFileSync(__dirname+'/public/data.html',(`${Object.keys(req.body)[0]} : ${Object.values(req.body)[0]}<br>`),err=>console.log(err)))
         })
-        res.sendFile(__dirname+'/views/mainPage.html')
+        res.redirect('/')
     }
     Post()
 })
 app.get('/',(req,res,next)=>{
-    res.redirect('/login')
+    res.sendFile(__dirname+'/views/mainPage.html')
 })
 
 
